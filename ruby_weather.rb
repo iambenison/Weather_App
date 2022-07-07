@@ -72,7 +72,7 @@ def get_weather
   limit = 2
   no_more_tries = false
   key_url = "http://dataservice.accuweather.com/locations/v1/postalcodes/CA/search"
-  api_key = "TCM86A7nzGw6RDfuWLJFhO0Q6VF5Vhdl"
+  api_key = ENV['MY_API_KEY']
   conditions_url = "http://dataservice.accuweather.com/currentconditions/v1/"
   detail = true
 
