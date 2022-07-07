@@ -27,23 +27,11 @@ def validate_postal_code(postal_code, no_more_tries, count, limit, invalid,promp
   end
 end
 
-#Get the Location Key
-def api_call_1(api_key, params, key_url)
+#Get the Location and Current Conditions
+def api_call(params, key_url)
 
   res = Faraday.get(key_url) do |req|
-    req.params['apikey'] = api_key
-    req.params['q'] = params
-
-  end
-  resp = JSON.parse(res.body)
-end
-
-#Get the Current Conditions
-def api_call_2(api_key, params, key_url)
-
-  res = Faraday.get(key_url) do |req|
-    req.params['apikey'] = api_key
-    req.params['details'] = params
+    req.params = params
 
   end
   resp = JSON.parse(res.body)
@@ -81,13 +69,15 @@ def get_weather
   validate_postal_code(postal_code, no_more_tries, count, limit, invalid,prompt, tries)
 
   begin
-    resp = api_call_1(api_key, postal_code, key_url)
+    params = {apikey: api_key, q: postal_code }
+    resp = api_call(params, key_url)
 
     location = resp[0]["Key"]
 
     key_url = conditions_url + location
 
-    resp = api_call_2(api_key, detail, key_url)
+    params = {apikey: api_key, details: detail}
+    resp = api_call(params, key_url)
 
     output_weather(resp)
   rescue
