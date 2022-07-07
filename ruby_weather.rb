@@ -64,7 +64,7 @@ def output_weather(resp)
 end
 
 #Call all methods and get the Weather Output
-def get_weather()
+def get_weather
   prompt = "> Enter your Postal Code (A1A1A1)"
   invalid = "***** INVALID POSTAL CODE ****** \n "
   tries = "Number of tries exceeded"
@@ -95,4 +95,4 @@ def get_weather()
   end
 end
 
-get_weather()
+get_weather
